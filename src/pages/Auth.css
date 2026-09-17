@@ -1,0 +1,237 @@
+.auth-page {
+    min-height: 100vh;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background: #eef1f3;
+  
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .auth-card {
+    width: 390px;
+    min-height: 650px;
+  
+    background: white;
+  
+    border-radius: 20px;
+    overflow: hidden;
+  
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* CABECERA */
+  
+  .auth-header {
+    height: 140px;
+  
+    background: #304f64;
+  
+    display: flex;
+    align-items: center;
+  
+    padding: 0 30px;
+  }
+  
+  .auth-header h1 {
+    color: white;
+  
+    font-size: 23px;
+    font-weight: 600;
+  
+    margin: 0;
+  }
+  
+  /* SIGN IN / REGISTER */
+  
+  .auth-tabs {
+    display: flex;
+  
+    margin-top: -22px;
+  
+    padding: 0 25px;
+  }
+  
+  .tab {
+    flex: 1;
+  
+    height: 45px;
+  
+    border: none;
+  
+    background: white;
+    color: #304f64;
+  
+    cursor: pointer;
+  
+    font-weight: 600;
+  }
+  
+  .tab:first-child {
+    border-radius: 25px 0 0 25px;
+  }
+  
+  .tab:last-child {
+    border-radius: 0 25px 25px 0;
+  }
+  
+  .tab.active {
+    background: #f15a3b;
+    color: white;
+  }
+  
+  /* CONTENIDO */
+  
+  .auth-content {
+    padding: 30px;
+  }
+  
+  .auth-input {
+    width: 100%;
+  
+    height: 45px;
+  
+    margin-bottom: 14px;
+  
+    border: none;
+    border-radius: 9px;
+  
+    background: #eef1f3;
+  
+    padding: 0 15px;
+  
+    font-size: 14px;
+  
+    outline: none;
+  }
+  
+  .auth-input:focus {
+    box-shadow: 0 0 0 2px #f15a3b;
+  }
+  
+  /* OLVIDÉ CONTRASEÑA */
+  
+  .forgot-password {
+    width: 100%;
+  
+    border: none;
+    background: transparent;
+  
+    color: #f15a3b;
+  
+    text-align: right;
+  
+    cursor: pointer;
+  
+    font-size: 12px;
+  
+    margin-bottom: 18px;
+  }
+  
+  /* BOTÓN PRINCIPAL */
+  
+  .main-auth-button {
+    width: 100%;
+    height: 46px;
+  
+    border: none;
+    border-radius: 9px;
+  
+    background: #263d4d;
+    color: white;
+  
+    cursor: pointer;
+  
+    font-weight: 600;
+  
+    transition: 0.25s;
+  }
+  
+  .main-auth-button:hover {
+    background: #1c303d;
+  }
+  
+  /* TEXTO SOCIAL */
+  
+  .social-text {
+    text-align: center;
+  
+    color: #777;
+  
+    font-size: 12px;
+  
+    margin: 22px 0 15px;
+  }
+  
+  /* FACEBOOK GOOGLE APPLE */
+  
+  .social-buttons {
+    display: flex;
+  
+    justify-content: center;
+  
+    gap: 14px;
+  }
+  
+  .social-button {
+    width: 55px;
+    height: 42px;
+  
+    border-radius: 7px;
+  
+    cursor: pointer;
+  
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .facebook {
+    border: 1px solid #d8dfe5;
+  
+    background: #fff5f1;
+  
+    color: #4267b2;
+  }
+  
+  .google {
+    border: 1px solid #d8dfe5;
+  
+    background: #fff5f1;
+  
+    color: #e0523d;
+  }
+  
+  .apple {
+    border: 1px solid #d8dfe5;
+  
+    background: #fff5f1;
+  
+    color: black;
+  }
+  
+  /* CAMBIAR ENTRE LOGIN Y REGISTER */
+  
+  .change-mode-text {
+    text-align: center;
+  
+    font-size: 11px;
+  
+    color: #777;
+  
+    margin-top: 30px;
+  }
+  
+  .change-mode-text button {
+    border: none;
+    background: transparent;
+  
+    color: #f15a3b;
+  
+    cursor: pointer;
+  
+    font-weight: bold;
+  
+    margin-left: 4px;
+  }

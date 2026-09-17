@@ -1,0 +1,138 @@
+.welcome-page {
+    min-height: 100vh;
+    width: 100%;
+    background: #304f64;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    position: relative;
+    overflow: hidden;
+  
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* CONTENIDO PRINCIPAL */
+  
+  .welcome-content {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* ILUSTRACIÓN */
+  
+  .welcome-illustration {
+    width: 230px;
+    height: 230px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-bottom: 30px;
+  }
+  
+  .coffee-circle {
+    width: 210px;
+    height: 210px;
+  
+    background: #7395ad;
+    border-radius: 50%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .welcome-image {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  /* TEXTO */
+  
+  .welcome-text {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  
+  .welcome-text p {
+    color: #ffffff;
+    font-size: 19px;
+    margin: 0 0 5px;
+    font-weight: 400;
+  }
+  
+  .welcome-text h1 {
+    color: #f15a3b;
+    font-size: 34px;
+    margin: 0;
+    font-weight: 700;
+  }
+  
+  /* BOTÓN */
+  
+  .get-started-button {
+    width: 170px;
+    height: 48px;
+  
+    border: none;
+    border-radius: 7px;
+  
+    background: #263d4d;
+    color: #ffffff;
+  
+    font-size: 14px;
+    font-weight: 500;
+  
+    cursor: pointer;
+  
+    transition: 0.25s ease;
+  }
+  
+  .get-started-button:hover {
+    background: #1d303d;
+    transform: scale(1.03);
+  }
+  
+  /* DECORACIONES DEL FONDO */
+  
+  .welcome-decoration {
+    position: absolute;
+  
+    width: 90px;
+    height: 45px;
+  
+    border: 11px solid #52758c;
+    border-radius: 50%;
+  
+    transform: rotate(-45deg);
+  
+    opacity: 0.9;
+  }
+  
+  .bean-one {
+    top: 60px;
+    right: -20px;
+  }
+  
+  .bean-two {
+    top: 125px;
+    right: 20px;
+  
+    width: 55px;
+    height: 27px;
+  
+    border-width: 8px;
+  }
