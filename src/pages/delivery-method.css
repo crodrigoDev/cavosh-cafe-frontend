@@ -1,0 +1,291 @@
+:root {
+  --primary-blue: #2E3A59;
+  --accent-red: #E74C3C;
+  --bg-white: #ffffff;
+  --bg-light: #F9FAFB;
+  --text-dark: #1F2937;
+  --text-grey: #6B7280;
+  --border-color: #E5E7EB;
+  --calendar-bg: #F3F4F6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- CENTRADO GLOBAL --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor principal simulando móvil */
+.app-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-white);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Cabecera */
+.app-header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 50px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.delivery-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Área scrolleable */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 100px; /* Espacio para el footer */
+}
+
+/* Tabs Pick up / Delivery */
+.method-tabs {
+  display: flex;
+  background-color: #E5E7EB;
+  border-radius: 25px;
+  padding: 4px;
+  margin-top: -15px; /* Superponer ligeramente sobre el header azul */
+  position: relative;
+  z-index: 10;
+  margin-bottom: 25px;
+}
+
+.method-tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-grey);
+  transition: all 0.2s;
+}
+
+.method-tab.active {
+  background-color: var(--accent-red);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Secciones Generales */
+.section-block {
+  margin-bottom: 25px;
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--text-grey);
+  margin: 0 0 15px 0;
+}
+
+/* Radio Buttons (Reutilizados) */
+.radio-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #D1D5DB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.radio-circle.selected {
+  border-color: var(--accent-red);
+}
+
+.radio-inner {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+}
+
+/* Calendario */
+.calendar-container {
+  background-color: var(--calendar-bg);
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cal-month {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.cal-nav-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px 0;
+  text-align: center;
+}
+
+.cal-day-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #9CA3AF;
+  margin-bottom: 5px;
+}
+
+.cal-day {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  justify-self: center;
+  transition: all 0.2s;
+}
+
+.cal-day:hover:not(.empty) {
+  background-color: #E5E7EB;
+}
+
+.cal-day.selected {
+  background-color: var(--accent-red);
+  color: white;
+  font-weight: 700;
+}
+
+.cal-day.empty {
+  cursor: default;
+}
+
+/* Selector de Hora */
+.time-selector-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.time-input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--calendar-bg);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.time-input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  width: 80px;
+  text-align: center;
+  outline: none;
+}
+
+.time-arrows {
+  display: flex;
+  flex-direction: column;
+  font-size: 8px;
+  color: var(--text-grey);
+  cursor: pointer;
+}
+
+/* Footer Fijo */
+.footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 20px 25px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.next-btn {
+  width: 100%;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

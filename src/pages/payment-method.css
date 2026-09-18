@@ -1,0 +1,285 @@
+:root {
+  --primary-blue: #2E3A59;
+  --accent-red: #E74C3C;
+  --bg-white: #ffffff;
+  --bg-light: #F9FAFB;
+  --bg-grey: #E5E7EB;
+  --text-dark: #1F2937;
+  --text-grey: #6B7280;
+  --border-color: #E5E7EB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- CENTRADO GLOBAL --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor principal simulando móvil */
+.app-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-white);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Cabecera */
+.app-header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 50px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.payment-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Área scrolleable */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 25px 20px 100px;
+}
+
+/* --- Selector de Tipo de Pago (Círculos) --- */
+.payment-types-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.payment-type-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: var(--bg-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.payment-icon {
+  font-size: 28px;
+  /* Filtro para simular iconos grises si no están activos */
+  filter: grayscale(100%); 
+  opacity: 0.6;
+}
+
+.payment-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-grey);
+}
+
+/* Estado Activo del Tipo de Pago */
+.payment-type-btn.active .icon-circle {
+  background-color: var(--accent-red);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+.payment-type-btn.active .payment-icon {
+  filter: grayscale(0%);
+  opacity: 1;
+  /* Si usas SVGs, aquí cambiarías el fill a blanco */
+  color: white; 
+}
+
+.payment-type-btn.active .payment-label {
+  color: var(--accent-red);
+}
+
+/* --- Lista de Tarjetas Guardadas --- */
+.saved-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: var(--bg-light);
+}
+
+.card-item.selected {
+  border-color: var(--accent-red);
+  background-color: #FFF5F5; /* Fondo rojo muy claro */
+}
+
+.card-icon {
+  width: 40px;
+  height: 30px;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Simulación visual de logos */
+.mc-logo {
+  display: flex;
+  position: relative;
+}
+.mc-logo .circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.mc-logo .red { background-color: #EB001B; }
+.mc-logo .yellow { background-color: #F79E1B; margin-left: -6px; mix-blend-mode: multiply; }
+
+.visa-logo {
+  font-size: 10px;
+  font-weight: 900;
+  color: #1434CB;
+  font-style: italic;
+}
+
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.card-number {
+  font-size: 12px;
+  color: var(--text-grey);
+  letter-spacing: 1px;
+}
+
+/* Radio Buttons (Reutilizados) */
+.radio-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #D1D5DB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.radio-circle.selected {
+  border-color: var(--accent-red);
+}
+
+.radio-inner {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+}
+
+/* --- Botón Añadir Tarjeta --- */
+.add-card-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--bg-grey);
+  border: none;
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-card-btn:hover {
+  background-color: #D1D5DB;
+}
+
+.plus-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Footer Fijo */
+.footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 20px 25px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.next-btn {
+  width: 100%;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,316 @@
+:root {
+  --primary-blue: #2E3A59;
+  --accent-red: #E74C3C;
+  --bg-white: #ffffff;
+  --bg-light: #F3F4F6; /* Gris muy claro para fondos */
+  --text-dark: #1F2937;
+  --text-grey: #6B7280;
+  --text-blue-grey: #9CA3AF;
+  --border-color: #E5E7EB;
+  --timeline-dark: #2E3A59;
+  --timeline-light: #A5B4CB; /* Azul grisáceo claro */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- CENTRADO GLOBAL --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor principal simulando móvil */
+.app-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-white);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Cabecera */
+.app-header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 50px 20px 30px; /* Más padding abajo para las tabs */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tracking-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+/* Área scrolleable */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 100px;
+}
+
+/* --- Tabs (Tracking / Order details) --- */
+.tracking-tabs-container {
+  margin-top: -20px; /* Superponer sobre el header azul */
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 10;
+}
+
+.tracking-tabs {
+  display: flex;
+  background-color: #E5E7EB;
+  border-radius: 25px;
+  padding: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-grey);
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background-color: var(--accent-red);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- Tarjeta de Número de Pedido --- */
+.order-number-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.order-number-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.order-number-badge {
+  background-color: var(--primary-blue);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge-number {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* --- Información de Recogida --- */
+.pickup-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.info-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  width: 40%;
+}
+
+.info-value {
+  font-size: 13px;
+  color: var(--text-dark);
+  width: 60%;
+  text-align: left;
+}
+
+.info-value.multiline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* --- Sección de Seguimiento (Timeline) --- */
+.tracking-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 20px 0;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 15px; /* Espacio para la línea */
+}
+
+/* Línea vertical de fondo (gris) */
+.timeline-line-bg {
+  position: absolute;
+  left: 25px; /* Centrado con los círculos */
+  top: 10px;
+  bottom: 10px;
+  width: 15px;
+  background-color: var(--bg-light);
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* Barra de progreso (azul oscuro) */
+.timeline-progress-bar {
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  width: 15px;
+  background-color: var(--timeline-dark);
+  border-radius: 10px;
+  z-index: 2;
+  transition: height 0.3s ease;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 3;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Indicadores visuales (Círculos) */
+.timeline-indicator {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bg-light);
+  border: 3px solid white; /* Borde blanco para separar de la línea */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Estados de los círculos */
+.circle.filled {
+  background-color: var(--timeline-dark);
+}
+
+.circle.active {
+  background-color: var(--timeline-light);
+  /* Si quisieras un efecto de pulso, se añadiría aquí */
+}
+
+.circle.pending {
+  background-color: var(--bg-light);
+}
+
+/* Contenido del texto */
+.timeline-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* Estilos según el estado del paso */
+.timeline-item.completed .step-label {
+  font-weight: 700;
+}
+
+.timeline-item.active .step-label {
+  color: var(--text-blue-grey);
+}
+
+.timeline-item.pending .step-label {
+  color: var(--text-blue-grey);
+}
+
+/* Icono de check */
+.check-icon {
+  color: var(--accent-red);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* --- Footer Fijo --- */
+.footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 20px 25px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.back-home-btn {
+  width: 100%;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

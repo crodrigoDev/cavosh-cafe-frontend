@@ -1,0 +1,267 @@
+:root {
+  --primary-blue: #2E3A59;
+  --accent-red: #E74C3C;
+  --bg-white: #ffffff;
+  --bg-light: #F3F4F6; /* Gris muy claro para las tarjetas */
+  --text-dark: #1F2937;
+  --text-grey: #6B7280;
+  --text-blue-grey: #9CA3AF;
+  --border-color: #E5E7EB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- CENTRADO GLOBAL --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Contenedor principal simulando móvil */
+.app-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-white);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Cabecera */
+.app-header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 50px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.review-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Área scrolleable */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  padding-bottom: 120px; /* Espacio para el footer */
+  background-color: var(--bg-white);
+}
+
+/* Secciones */
+.review-section {
+  margin-bottom: 25px;
+}
+
+.section-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 10px 0;
+}
+
+/* Tarjetas de información (Contenedores grises) */
+.info-card {
+  background-color: var(--bg-light);
+  border-radius: 15px;
+  padding: 15px;
+  position: relative;
+}
+
+/* Fila simple (para Deliver to y Payment) */
+.info-card.single-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Order Details --- */
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 12px;
+}
+
+.order-item-row.with-border {
+  border-bottom: 1px solid #E5E7EB;
+  margin-bottom: 12px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.item-qty {
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.item-desc {
+  font-size: 11px;
+  color: var(--text-blue-grey);
+}
+
+.item-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* --- Deliver to / Payment --- */
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.sub-text {
+  font-size: 13px;
+  color: var(--text-grey);
+}
+
+.payment-content {
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+}
+
+.payment-content .sub-text {
+  color: var(--text-dark);
+}
+
+/* Icono de edición (Lápiz) */
+.edit-icon-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-blue-grey);
+  cursor: pointer;
+  padding: 5px;
+}
+
+.absolute-right {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* --- Pick up details --- */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-right: 25px; /* Espacio para el icono de edición */
+}
+
+/* --- Footer Fijo --- */
+.footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 20px 25px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-footer {
+  gap: 20px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subtotal-label {
+  font-size: 12px;
+  color: var(--text-grey);
+}
+
+.subtotal-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent-red);
+}
+
+.place-order-btn {
+  flex: 1;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}

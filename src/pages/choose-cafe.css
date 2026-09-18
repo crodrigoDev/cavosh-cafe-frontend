@@ -1,0 +1,401 @@
+:root {
+  --primary-blue: #2E3A59;
+  --accent-red: #E74C3C;
+  --bg-white: #ffffff;
+  --text-dark: #1F2937;
+  --text-grey: #6B7280;
+  --border-color: #E5E7EB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- CENTRADO GLOBAL FORZADO --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; /* Asegura que ocupen toda la pantalla */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5; 
+  
+  /* MÉTODO DE CENTRADO 1: Flexbox (El más moderno) */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  min-height: 100vh;       /* Altura mínima de la ventana */
+}
+
+/* Contenedor principal simulando móvil */
+.app-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-white);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  position: relative;
+  
+  /* MÉTODO DE CENTRADO 2: Margen automático (Respaldo) */
+  /* Esto asegura que si Flexbox falla por alguna razón, el margen lo centre */
+  margin: 0 auto; 
+}
+
+/* Cabecera */
+.app-header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 50px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Área scrolleable */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 120px;
+}
+
+/* Secciones */
+.selection-section {
+  padding: 0 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: block;
+}
+
+.section-subtitle {
+  font-size: 12px;
+  color: var(--text-grey);
+  margin-top: 4px;
+  display: block;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.turn-on-btn {
+  background: none;
+  border: none;
+  color: var(--accent-red);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Radio Buttons personalizados */
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #D1D5DB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.radio-circle.selected {
+  border-color: var(--accent-red);
+}
+
+.radio-inner {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+}
+
+/* Contenido expandido */
+.section-content {
+  padding-bottom: 20px;
+}
+
+/* Input de ciudad */
+.input-wrapper {
+  position: relative;
+}
+
+.city-input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #F9FAFB;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-grey);
+  font-size: 14px;
+}
+
+/* Tabs Lista / Mapa */
+.view-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.view-tab {
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--text-grey);
+  cursor: pointer;
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
+
+.view-tab.active {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.view-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-red);
+}
+
+/* --- ESTILOS DEL MAPA --- */
+.map-container {
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: #E5E7EB;
+  background-image: 
+    linear-gradient(#D1D5DB 1px, transparent 1px),
+    linear-gradient(90deg, #D1D5DB 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.map-pin {
+  position: absolute;
+  font-size: 24px;
+  color: var(--primary-blue);
+}
+
+.pin-1 { top: 50%; left: 40%; }
+.pin-2 { top: 60%; left: 70%; }
+
+.map-card {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 180px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.cafe-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+}
+
+.cafe-address, .cafe-hours {
+  margin: 0;
+  font-size: 10px;
+  color: var(--text-grey);
+  line-height: 1.4;
+}
+
+.details-link {
+  background: none;
+  border: none;
+  color: var(--accent-red);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0;
+  margin-top: 4px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.map-tag {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  color: var(--text-grey);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- ESTILOS DE LA LISTA --- */
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: #F9FAFB;
+}
+
+.list-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.status-dot.closed {
+  background-color: #EF4444;
+}
+
+.select-cafe-btn {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary-blue);
+  cursor: pointer;
+}
+
+.select-cafe-btn:hover {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+/* Footer Fijo */
+.footer-fixed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 20px 25px;
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.chosen-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.chosen-label {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.chosen-value {
+  color: var(--text-grey);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-save, .btn-cancel {
+  flex: 1;
+  padding: 14px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-save {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.btn-cancel {
+  background-color: white;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
