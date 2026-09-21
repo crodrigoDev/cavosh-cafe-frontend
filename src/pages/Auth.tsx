@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import './Auth.css'
+import facebookIcon from '../assets/facebook.avif'
+import googleIcon from '../assets/google.webp'
+import appleIcon from '../assets/apple.svg'
 
 function Auth() {
   const [modo, setModo] = useState<'signin' | 'register'>('signin')
@@ -100,20 +103,19 @@ function Auth() {
             </>
           )}
 
-          <div className="social-buttons">
-            <button className="social-button facebook">
-              f
-            </button>
+<div className="social-buttons">
+  <button className="social-button">
+    <img src={facebookIcon} alt="Facebook" />
+  </button>
 
-            <button className="social-button google">
-              G+
-            </button>
+  <button className="social-button">
+    <img src={googleIcon} alt="Google" />
+  </button>
 
-            <button className="social-button apple">
-              
-            </button>
-          </div>
-
+  <button className="social-button">
+    <img src={appleIcon} alt="Apple" />
+  </button>
+</div>
           {modo === 'signin' ? (
             <p className="change-mode-text">
               Don't have an account?

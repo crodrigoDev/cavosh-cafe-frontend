@@ -1,14 +1,14 @@
 .auth-page {
-    min-height: 100vh;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    background: #eef1f3;
-  
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #304f64;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
   
   .auth-card {
     width: 390px;
@@ -169,9 +169,7 @@
   
   .social-buttons {
     display: flex;
-  
     justify-content: center;
-  
     gap: 14px;
   }
   
@@ -179,38 +177,24 @@
     width: 55px;
     height: 42px;
   
+    border: 1px solid #d8dfe5;
     border-radius: 7px;
+  
+    background: #fff5f1;
   
     cursor: pointer;
   
-    font-size: 18px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  .facebook {
-    border: 1px solid #d8dfe5;
-  
-    background: #fff5f1;
-  
-    color: #4267b2;
+  .social-button img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
   }
-  
-  .google {
-    border: 1px solid #d8dfe5;
-  
-    background: #fff5f1;
-  
-    color: #e0523d;
-  }
-  
-  .apple {
-    border: 1px solid #d8dfe5;
-  
-    background: #fff5f1;
-  
-    color: black;
-  }
-  
+
   /* CAMBIAR ENTRE LOGIN Y REGISTER */
   
   .change-mode-text {
