@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-  --primary-blue: #2E3A59;
+  --primary-blue: #2A3440;
   --accent-red: #E74C3C;
   --bg-white: #ffffff;
   --bg-light: #F9FAFB;
-  --text-dark: #1F2937;
+  --text-dark: #0e1013;
   --text-grey: #6B7280;
   --border-color: #E5E7EB;
 }
@@ -18,11 +20,19 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +42,7 @@ body {
 /* Contenedor principal simulando móvil */
 .app-container {
   width: 375px;
-  height: 812px;
+  height: 825px;
   background-color: var(--bg-white);
   border-radius: 30px;
   overflow: hidden;
@@ -52,42 +62,69 @@ body {
   align-items: center;
 }
 
+/* Cabecera del carrito con imagen de fondo */
+.cart-header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 130px;
+  padding: 60px 20px 30px;
+  align-items: flex-end;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
 .cart-header h1 {
   font-size: 22px;
-  font-weight: 700;
-  margin: 0;
+  font-weight: 500;
+  margin: 0 0 30px 0;
+  color: #ffffff;
+  letter-spacing: 1px;
 }
 
 /* Área scrolleable */
 .content-scroll-area {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
-  padding-bottom: 100px; /* Espacio para la barra de navegación */
+  padding: 30px 0;
+  padding-bottom: 120px;
   background-color: var(--bg-white);
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content-scroll-area::-webkit-scrollbar {
+  display: none;
 }
 
 /* Lista de Productos */
 .cart-items-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding: 0 20px;
 }
 
+/* Card */
 .cart-item-card {
   display: flex;
   align-items: center;
   background-color: var(--bg-light);
   border-radius: 15px;
-  padding: 12px;
+  padding: 0;
   position: relative;
+  width: 100%;
+  height: 85px;
+  box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.18);
 }
 
+/* Imagen */
 .item-image-wrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+  width: 85px;
+  height: 85px;
+  border-radius: 15px;
   overflow: hidden;
   background-color: #E5E7EB;
   flex-shrink: 0;
@@ -105,6 +142,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: flex-start;
+  text-align: left;
+  padding-right: 45px;
 }
 
 .item-name {
@@ -112,6 +152,7 @@ body {
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
+  text-align: left;
 }
 
 .item-description {
@@ -119,6 +160,7 @@ body {
   color: var(--text-grey);
   margin: 0;
   line-height: 1.3;
+  text-align: left;
 }
 
 .item-price {
@@ -126,19 +168,22 @@ body {
   font-weight: 700;
   color: var(--text-dark);
   margin: 4px 0 0 0;
+  text-align: left;
 }
 
-/* Control de Cantidad (Botones + y -) */
+/* Contador */
 .quantity-control {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: var(--accent-red);
-  border-radius: 20px;
-  padding: 4px 0;
-  width: 28px;
+  border-radius: 15px;
+  padding: 8px 0;
+  width: 34px;
+  height: 85px;
   position: absolute;
-  right: 15px;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -160,7 +205,7 @@ body {
 
 .qty-value {
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   margin: 2px 0;
 }
@@ -168,6 +213,7 @@ body {
 /* Sección de Código Promocional */
 .promo-section {
   margin-bottom: 25px;
+  padding: 0;
 }
 
 .promo-label {
@@ -175,7 +221,9 @@ body {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
+  padding-left: 22px;
+  text-align: left;
 }
 
 .promo-input-group {
@@ -184,6 +232,7 @@ body {
   border-radius: 25px;
   overflow: hidden;
   padding: 4px;
+  margin: 0 15px;
 }
 
 .promo-input {
@@ -194,17 +243,30 @@ body {
   font-size: 14px;
   outline: none;
   color: var(--text-dark);
+  font-family: inherit;
 }
 
 .apply-btn {
   background-color: var(--accent-red);
   color: white;
   border: none;
-  padding: 0 20px;
+  padding: 0 35px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
+}
+
+.promo-feedback {
+  font-size: 12px;
+  margin: 6px 0 0 22px;
+  color: var(--accent-red);
+  font-weight: 500;
+}
+
+.promo-feedback--ok {
+  color: #10B981;
 }
 
 /* Resumen de Totales */
@@ -213,6 +275,7 @@ body {
   flex-direction: column;
   gap: 12px;
   margin-bottom: 30px;
+  padding: 0 22px;
 }
 
 .total-row {
@@ -223,24 +286,26 @@ body {
 }
 
 .total-label {
-  font-weight: 600;
+  font-weight: 550;
   color: var(--text-dark);
 }
 
 .total-value {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-dark);
 }
 
 .grand-total .total-label,
 .grand-total .total-value {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 550;
 }
 
 /* Botón Checkout */
 .checkout-btn {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto 20px auto;
+  display: block;
   background-color: var(--primary-blue);
   color: white;
   border: none;
@@ -249,22 +314,28 @@ body {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 20px;
+  font-family: inherit;
 }
 
-/* Barra de Navegación Inferior */
+/* =========================================
+   Barra de Navegación Inferior
+   ========================================= */
 .bottom-nav {
   position: absolute;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  background: white;
+
+  background: rgb(255, 255, 255);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 10px 25px; /* Espacio extra abajo para el "home indicator" */
-  border-top: 1px solid var(--border-color);
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  padding: 12px 10px 18px;
+
+  border-radius: 40px 40px 0 0;
+
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .nav-item {
@@ -277,22 +348,41 @@ body {
   cursor: pointer;
   padding: 5px;
   flex: 1;
+  font-family: inherit;
 }
 
+/* Íconos SVG inline */
 .nav-icon {
-  font-size: 20px;
-  color: #9CA3AF; /* Gris para inactivo */
+  width: 30px;
+  height: 30px;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  stroke: currentColor;
 }
 
 .nav-label {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
   color: #9CA3AF;
 }
 
-/* Estado activo de la navegación */
-.nav-item.active .nav-icon {
+/* Activo (seleccionado): color rojo #E74C3C en TODO el icono
+   (trazo y relleno interno) y en la etiqueta.
+   No hay efecto hover. */
+.nav-item.active .nav-icon,
+.nav-item.active .nav-icon svg,
+.nav-item.active .nav-icon svg * {
   color: var(--accent-red);
+  stroke: var(--accent-red);
+  fill: var(--accent-red);
 }
 
 .nav-item.active .nav-label {

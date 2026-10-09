@@ -1,195 +1,320 @@
-:root {
-  --primary-blue: #2E3A59;
-  --accent-red: #E74C3C;
-  --bg-white: #ffffff;
-  --bg-light: #F9FAFB;
-  --bg-grey: #E5E7EB;
-  --text-dark: #1F2937;
-  --text-grey: #6B7280;
-  --border-color: #E5E7EB;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-* {
+/* ============================
+   Reset básico
+   ============================ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* --- CENTRADO GLOBAL --- */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Contenedor principal simulando móvil */
-.app-container {
-  width: 375px;
-  height: 812px;
-  background-color: var(--bg-white);
-  border-radius: 30px;
   overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+:root {
+  --brand-coral: #e05a3a;
+  --brand-coral-soft: #fde8e0;
+  --brand-navy: #35536b;
+  --brand-blue: #2b6cb0;
+  --brand-black: #000000;
+  --app-max-height: 820px;
+}
+
+/* ============================
+   Contenedor principal
+   ============================ */
+.app-container {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 100vh;
+  height: 100dvh;
+  max-height: var(--app-max-height);
   margin: 0 auto;
+  background-color: #f5f6fa;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
 }
 
-/* Cabecera */
+@media (min-width: 480px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9edf3;
+  }
+
+  .app-container {
+    height: min(100dvh - 48px, var(--app-max-height));
+    max-height: var(--app-max-height);
+    margin: 0 auto;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ============================
+   Cabecera con dash.svg de fondo
+   ============================ */
 .app-header {
-  background-color: var(--primary-blue);
-  color: white;
-  padding: 50px 20px 20px;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  padding: 16px 20px;
+  min-height: 150px;
+  color: #ffffff;
+  background-color: var(--brand-blue);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  flex-shrink: 0;
 }
 
-.back-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
+.app-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.app-header > * {
+  position: relative;
+  z-index: 2;
+}
+
+.payment-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  gap: 0;
 }
 
 .payment-header h1 {
-  font-size: 20px;
-  font-weight: 600;
+  grid-column: 2;
+  font-family: 'Poppins', sans-serif;
+  font-size: 25px;
+  font-weight: 450;
+  color: #ffffff;
   margin: 0;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-/* Área scrolleable */
+.back-button {
+  grid-column: 1;
+  justify-self: start;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 50px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================
+   Área de contenido con scroll
+   ============================ */
 .content-scroll-area {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: 25px 20px 100px;
+  -webkit-overflow-scrolling: touch;
+  padding: 50px 16px 24px;
+
+  /* Ocultar barra de scroll (Firefox) */
+  scrollbar-width: none;
+  /* Ocultar barra de scroll (IE / Edge legacy) */
+  -ms-overflow-style: none;
 }
 
-/* --- Selector de Tipo de Pago (Círculos) --- */
+/* Ocultar barra de scroll (Chrome, Safari, Edge, Opera) */
+.content-scroll-area::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* ============================
+   Selector de tipo de pago
+   ============================ */
 .payment-types-row {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 30px;
+  justify-content: space-around;
+  gap: 10px;
+  margin-bottom: 55px;
 }
 
 .payment-type-btn {
-  flex: 1;
-  background: transparent;
-  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 95px;
+  height: 150px;
+  padding: 18px 8px 14px;
+  background-color: #EBEFF2;
+  border: 2px solid #e2e8f0;
+  border-radius: 60px;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.payment-type-btn:active {
+  transform: none;
+}
+
+.payment-type-btn.active {
+  background-color: var(--brand-coral);
+  border-color: var(--brand-coral);
+  box-shadow: none;
 }
 
 .icon-circle {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background-color: var(--bg-grey);
+  background-color: #f5f6fa;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: all 0.2s;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  margin-top: -8px;
+}
+
+.payment-type-btn.active .icon-circle {
+  background-color: var(--brand-coral-soft);
 }
 
 .payment-icon {
-  font-size: 28px;
-  /* Filtro para simular iconos grises si no están activos */
-  filter: grayscale(100%); 
-  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.payment-icon.card {
+  color: #c0392b;
+}
+
+.payment-icon.cash {
+  color: #1b3a5c;
+}
+
+.payment-icon.paypal {
+  color: #1b3a5c;
+}
+
+.payment-type-btn.active .payment-icon.card {
+  color: var(--brand-coral);
 }
 
 .payment-label {
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text-grey);
-}
-
-/* Estado Activo del Tipo de Pago */
-.payment-type-btn.active .icon-circle {
-  background-color: var(--accent-red);
-  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-}
-
-.payment-type-btn.active .payment-icon {
-  filter: grayscale(0%);
-  opacity: 1;
-  /* Si usas SVGs, aquí cambiarías el fill a blanco */
-  color: white; 
+  font-weight: 500;
+  color: #4a5568;
+  transition: color 0.2s ease;
 }
 
 .payment-type-btn.active .payment-label {
-  color: var(--accent-red);
+  color: #ffffff;
+  font-weight: 600;
 }
 
-/* --- Lista de Tarjetas Guardadas --- */
+/* ============================
+   Lista de tarjetas guardadas
+   ============================ */
 .saved-cards-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 40px;
 }
 
 .card-item {
   display: flex;
   align-items: center;
-  padding: 15px;
-  border: 1px solid var(--border-color);
+  gap: 4px;
+  padding: 6px 16px 14px 6px;
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
   border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  background-color: var(--bg-light);
+  cursor: default;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-shadow: none;
 }
 
 .card-item.selected {
-  border-color: var(--accent-red);
-  background-color: #FFF5F5; /* Fondo rojo muy claro */
+  border-color: #e2e8f0;
+  background-color: #ffffff;
 }
 
 .card-icon {
   width: 40px;
-  height: 30px;
-  background: white;
-  border-radius: 5px;
+  min-width: 40px;
+  height: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-right: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  justify-content: flex-start;
+  flex-shrink: 0;
 }
 
-/* Simulación visual de logos */
 .mc-logo {
-  display: flex;
   position: relative;
+  width: 40px;
+  height: 26px;
 }
+
 .mc-logo .circle {
-  width: 14px;
-  height: 14px;
+  position: absolute;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
+  top: 0;
 }
-.mc-logo .red { background-color: #EB001B; }
-.mc-logo .yellow { background-color: #F79E1B; margin-left: -6px; mix-blend-mode: multiply; }
+
+.mc-logo .circle.red {
+  background-color: #eb001b;
+  left: 0;
+}
+
+.mc-logo .circle.yellow {
+  background-color: #f79e1b;
+  right: 0;
+  opacity: 0.9;
+}
 
 .visa-logo {
-  font-size: 10px;
-  font-weight: 900;
-  color: #1434CB;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a1f71;
+  letter-spacing: 1px;
   font-style: italic;
 }
 
@@ -197,89 +322,178 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 4px;
 }
 
 .card-name {
   font-size: 14px;
-  font-weight: 700;
-  color: var(--text-dark);
+  font-weight: 600;
+  color: #2d3748;
 }
 
 .card-number {
-  font-size: 12px;
-  color: var(--text-grey);
+  font-size: 15px;
+  color: #5b626d;
   letter-spacing: 1px;
+  font-weight: 900;
 }
 
-/* Radio Buttons (Reutilizados) */
 .radio-circle {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid #D1D5DB;
+  border: 2px solid #cbd5e0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: all 0.2s;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
 }
 
 .radio-circle.selected {
-  border-color: var(--accent-red);
+  border-color: #cbd5e0;
 }
 
 .radio-inner {
-  width: 12px;
-  height: 12px;
-  background-color: var(--accent-red);
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background-color: #E74C3C;
 }
 
-/* --- Botón Añadir Tarjeta --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================
+   Botón "Add new card"
+   ============================ */
 .add-card-btn {
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
-  background-color: var(--bg-grey);
+  width: 100%;
+  padding: 20px;
+  background-color: #EBEFF2;
   border: none;
-  padding: 18px;
   border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--brand-black);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
 .add-card-btn:hover {
-  background-color: #D1D5DB;
+  background-color: #f0f7ff;
 }
 
 .plus-icon {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
 }
 
-/* Footer Fijo */
+/* ============================
+   Placeholder Cash / PayPal
+   ============================ */
+.payment-placeholder {
+  padding: 24px 16px;
+  background-color: #ffffff;
+  border: 2px dashed #e2e8f0;
+  border-radius: 12px;
+  text-align: center;
+  color: #718096;
+  font-size: 14px;
+}
+
+.payment-placeholder p {
+  margin: 0;
+}
+
+/* ============================
+   Footer con botón Next (sin position:absolute)
+   ============================ */
 .footer-fixed {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: white;
-  padding: 15px 20px 25px;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+  padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+  background-color: transparent;
 }
 
 .next-btn {
   width: 100%;
-  background-color: var(--primary-blue);
-  color: white;
+  padding: 14px;
+  background-color: #2A3440;
+  color: #ffffff;
   border: none;
-  padding: 16px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.next-btn:hover {
+  background-color: #2c4659;
+}
+
+.next-btn:active {
+  transform: none;
+}
+
+/* ============================
+   Focus visible
+   ============================ */
+.payment-type-btn:focus-visible,
+.card-item:has(:focus-visible),
+.add-card-btn:focus-visible,
+.next-btn:focus-visible,
+.back-button:focus-visible {
+  outline: 3px solid rgba(43, 108, 176, 0.35);
+  outline-offset: 2px;
+}
+
+@supports not selector(:has(*)) {
+  .card-item:focus-within {
+    outline: 3px solid rgba(43, 108, 176, 0.35);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 360px) {
+  .app-header {
+    min-height: 80px;
+  }
+
+  .payment-type-btn {
+    width: 84px;
+    padding: 14px 6px 12px;
+  }
+
+  .icon-circle {
+    width: 52px;
+    height: 52px;
+    margin-top: -6px;
+  }
+
+  .payment-label {
+    font-size: 12px;
+  }
 }

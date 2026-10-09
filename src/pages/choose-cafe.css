@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-  --primary-blue: #2E3A59;
+  --primary-blue: #2A3440;
   --accent-red: #E74C3C;
   --bg-white: #ffffff;
   --text-dark: #1F2937;
-  --text-grey: #6B7280;
+  --text-grey: #061c49;
   --border-color: #E5E7EB;
 }
 
@@ -11,26 +13,33 @@
   box-sizing: border-box;
 }
 
-/* --- CENTRADO GLOBAL FORZADO --- */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%; /* Asegura que ocupen toda la pantalla */
+  height: 100%;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
-  
-  /* MÉTODO DE CENTRADO 1: Flexbox (El más moderno) */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;     /* Centra verticalmente */
-  min-height: 100vh;       /* Altura mínima de la ventana */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* Contenedor principal simulando móvil */
 .app-container {
   width: 375px;
   height: 812px;
@@ -41,46 +50,93 @@ body {
   flex-direction: column;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   position: relative;
-  
-  /* MÉTODO DE CENTRADO 2: Margen automático (Respaldo) */
-  /* Esto asegura que si Flexbox falla por alguna razón, el margen lo centre */
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
-/* Cabecera */
+/* =========================================
+   CABECERA
+   ========================================= */
 .app-header {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  padding: 0;
+  display: block;
+  flex-shrink: 0;
   background-color: var(--primary-blue);
-  color: white;
-  padding: 50px 20px 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.header-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.header-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
+  padding: 0 20px;
 }
 
 .back-button {
-  background: none;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: none;
-  color: white;
-  font-size: 24px;
+  color: #F5E6D3;
   cursor: pointer;
   padding: 0;
-  line-height: 1;
+  transition: opacity 0.2s;
+  z-index: 2;
 }
 
-.app-header h1 {
-  font-size: 18px;
-  font-weight: 600;
+.back-button:hover { opacity: 0.8; }
+.back-button:active { transform: translateY(-50%) scale(0.92); }
+.back-button svg { width: 30px; height: 30px; }
+
+.header-overlay h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   margin: 0;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
 
-/* Área scrolleable */
+/* =========================================
+   ÁREA SCROLLEABLE
+   ========================================= */
 .content-scroll-area {
   flex: 1;
   overflow-y: auto;
   padding-bottom: 120px;
 }
 
-/* Secciones */
+/* =========================================
+   SECCIONES
+   ========================================= */
 .selection-section {
   padding: 0 20px;
 }
@@ -88,8 +144,8 @@ body {
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px 0;
+  align-items: center;
+  padding: 18px 0 8px;
   cursor: pointer;
 }
 
@@ -101,16 +157,17 @@ body {
 }
 
 .section-subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-grey);
-  margin-top: 4px;
   display: block;
 }
 
-.header-actions {
+.near-subtitle-row {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  padding-bottom: 15px;
 }
 
 .turn-on-btn {
@@ -118,67 +175,67 @@ body {
   border: none;
   color: var(--accent-red);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
+  font-family: inherit;
 }
 
-/* Radio Buttons personalizados */
 .radio-circle {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   border: 2px solid #D1D5DB;
+  background-color: #EBEFF2;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
 }
 
-.radio-circle.selected {
-  border-color: var(--accent-red);
-}
+.radio-circle.selected { border-color: #D1D5DB; }
 
 .radio-inner {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background-color: var(--accent-red);
   border-radius: 50%;
 }
 
-/* Contenido expandido */
-.section-content {
-  padding-bottom: 20px;
-}
+.section-content { padding-bottom: 15px; }
 
-/* Input de ciudad */
-.input-wrapper {
-  position: relative;
-}
+.input-wrapper { position: relative; }
 
 .city-input {
   width: 100%;
-  padding: 12px 40px 12px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: #F9FAFB;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #EBEFF2;
   font-size: 14px;
+  color: var(--text-grey);
   outline: none;
+  font-family: inherit;
 }
 
 .search-icon {
   position: absolute;
-  right: 12px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-grey);
   font-size: 14px;
 }
 
-/* Tabs Lista / Mapa */
+/* =========================================
+   TABS LIST / MAP
+   ========================================= */
 .view-tabs {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   margin-bottom: 15px;
   border-bottom: 1px solid var(--border-color);
 }
@@ -186,17 +243,16 @@ body {
 .view-tab {
   background: none;
   border: none;
-  padding: 10px 0;
+  padding: 10px 4px;
   font-size: 14px;
   color: var(--text-grey);
   cursor: pointer;
   position: relative;
-  flex: 1;
-  text-align: center;
+  font-family: inherit;
 }
 
 .view-tab.active {
-  color: var(--text-dark);
+  color: var(--accent-red);
   font-weight: 600;
 }
 
@@ -210,91 +266,158 @@ body {
   background-color: var(--accent-red);
 }
 
-/* --- ESTILOS DEL MAPA --- */
+/* =========================================
+   MAPA
+   ========================================= */
 .map-container {
-  height: 250px;
-  border-radius: 12px;
+  height: 260px;
+  border-radius: 14px;
   overflow: hidden;
   position: relative;
-  background-color: #E5E7EB;
-  background-image: 
-    linear-gradient(#D1D5DB 1px, transparent 1px),
-    linear-gradient(90deg, #D1D5DB 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-color: #f7f9fb;
+  border: 1px solid #eef2f6;
+}
+
+.map-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-roads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .map-pin {
   position: absolute;
-  font-size: 24px;
-  color: var(--primary-blue);
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
+  z-index: 2;
+  transition: transform 0.2s ease;
 }
 
-.pin-1 { top: 50%; left: 40%; }
-.pin-2 { top: 60%; left: 70%; }
+.map-pin svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
+.map-pin:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.pin-red {
+  top: 52%;
+  left: 26%;
+}
+
+.pin-blue {
+  top: 78%;
+  left: 82%;
+}
+
+/* =========================================
+   TARJETA FLOTANTE DEL MAPA
+   ========================================= */
 .map-card {
   position: absolute;
-  top: 40px;
-  left: 20px;
-  background: white;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 180px;
-}
-
-.card-header {
+  top: 14px;
+  right: 14px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 6px 8px;
+  box-shadow: 0 8px 22px rgba(31, 41, 55, 0.12);
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: flex-start;
+  width: 210px;
+  z-index: 3;
+}
+
+.map-card-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.cafe-name {
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--text-dark);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #10B981;
-  border-radius: 50%;
-}
-
-.cafe-address, .cafe-hours {
-  margin: 0;
-  font-size: 10px;
-  color: var(--text-grey);
-  line-height: 1.4;
-}
-
-.details-link {
-  background: none;
-  border: none;
-  color: var(--accent-red);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 0;
-  margin-top: 4px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.map-tag {
+.map-card-logo-img {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  background: white;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 10px;
-  color: var(--text-grey);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+  filter: drop-shadow(0 2px 4px rgb(0, 0, 0));
 }
 
-/* --- ESTILOS DE LA LISTA --- */
+.map-card-logo-text {
+  position: relative;
+  z-index: 1;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 11px;
+  color: #d1583c;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+}
+
+.map-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 0;
+}
+
+.map-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1.2;
+  text-align: left;
+  width: 100%;
+}
+
+.map-card-address {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-grey);
+  line-height: 1.35;
+  text-align: left;
+  width: 100%;
+}
+
+.map-card-hours {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-grey);
+  line-height: 1.35;
+  width: 100%;
+  text-align: left;
+  padding-left: 0;
+}
+
+/* =========================================
+   LISTA DE CAFÉS
+   ========================================= */
 .list-container {
   display: flex;
   flex-direction: column;
@@ -311,12 +434,15 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 10px;
   background-color: #F9FAFB;
+  gap: 10px;
 }
 
 .list-item-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
 .list-header {
@@ -326,8 +452,37 @@ body {
   margin-bottom: 2px;
 }
 
+.cafe-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 .status-dot.closed {
   background-color: #EF4444;
+}
+
+.cafe-address,
+.cafe-hours {
+  margin: 0;
+  font-size: 10px;
+  color: var(--text-grey);
+  line-height: 1.4;
+}
+
+.list-item-info .cafe-address,
+.list-item-info .cafe-hours {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .select-cafe-btn {
@@ -339,6 +494,9 @@ body {
   font-weight: 600;
   color: var(--primary-blue);
   cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .select-cafe-btn:hover {
@@ -346,7 +504,9 @@ body {
   color: white;
 }
 
-/* Footer Fijo */
+/* =========================================
+   FOOTER FIJO
+   ========================================= */
 .footer-fixed {
   position: absolute;
   bottom: 0;
@@ -356,6 +516,7 @@ body {
   padding: 15px 20px 25px;
   border-top: 1px solid var(--border-color);
   box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  z-index: 10;
 }
 
 .chosen-info {
@@ -371,7 +532,7 @@ body {
 }
 
 .chosen-value {
-  color: var(--text-grey);
+  color: var(--text-dark);
 }
 
 .action-buttons {
@@ -379,14 +540,17 @@ body {
   gap: 15px;
 }
 
-.btn-save, .btn-cancel {
+.btn-save,
+.btn-cancel {
   flex: 1;
-  padding: 14px;
-  border-radius: 25px;
+  padding: 12px 8px;
+  border-radius: 30px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   border: none;
+  font-family: inherit;
+  transition: opacity 0.2s;
 }
 
 .btn-save {
@@ -394,8 +558,12 @@ body {
   color: white;
 }
 
+.btn-save:hover { opacity: 0.9; }
+
 .btn-cancel {
   background-color: white;
   color: var(--text-dark);
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--text-dark);
 }
+
+.btn-cancel:hover { background-color: #f5f5f5; }

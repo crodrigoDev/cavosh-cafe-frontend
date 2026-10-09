@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-  --primary-blue: #2E3A59;
+  --primary-blue: #35536B;
   --accent-red: #E74C3C;
   --bg-white: #ffffff;
   --bg-light: #F9FAFB;
@@ -13,88 +15,110 @@
   box-sizing: border-box;
 }
 
-/* --- CENTRADO GLOBAL --- */
+/* Bloquea el scroll del body/html: solo el contenido interno se desplaza */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  position: fixed;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
+  background-color: #f0f2f5;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-/* Contenedor principal simulando móvil */
 .app-container {
   width: 375px;
-  height: 812px;
+  height: 820px;
   background-color: var(--bg-white);
   border-radius: 30px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   position: relative;
   margin: 0 auto;
 }
 
-/* Cabecera */
+/* Cabecera: la imagen SVG cubre todo el header */
 .app-header {
-  background-color: var(--primary-blue);
   color: white;
-  padding: 50px 20px 20px;
+  padding: 25px 20px 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--primary-blue);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 150px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.app-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.header-top-row {
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 100%;
 }
 
 .back-button {
   background: none;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 50px;
   cursor: pointer;
   padding: 0;
   line-height: 1;
 }
 
 .delivery-header h1 {
-  font-size: 20px;
-  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 23px;
+  font-weight: 500;
   margin: 0;
-}
-
-/* Área scrolleable */
-.content-scroll-area {
   flex: 1;
-  overflow-y: auto;
-  padding: 0 20px 100px; /* Espacio para el footer */
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding-right: 24px;
+  color: #ffffff;
 }
 
-/* Tabs Pick up / Delivery */
+/* Tabs anclados al app-container */
 .method-tabs {
   display: flex;
   background-color: #E5E7EB;
   border-radius: 25px;
-  padding: 4px;
-  margin-top: -15px; /* Superponer ligeramente sobre el header azul */
-  position: relative;
-  z-index: 10;
-  margin-bottom: 25px;
+  padding: 0px;
+  position: absolute;
+  top: 150px;
+  left: 20px;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 20;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .method-tab {
   flex: 1;
-  padding: 12px;
+  padding: 16px;
   border: none;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   background: transparent;
@@ -105,10 +129,24 @@ body {
 .method-tab.active {
   background-color: var(--accent-red);
   color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Secciones Generales */
+/* Área scrolleable - scrollbar oculto */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 55px 20px 100px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content-scroll-area::-webkit-scrollbar {
+  display: none;
+}
+
 .section-block {
   margin-bottom: 25px;
 }
@@ -128,12 +166,12 @@ body {
 }
 
 .section-subtitle {
-  font-size: 13px;
-  color: var(--text-grey);
+  font-size: 16px;
+  color: var(--text-dark);
   margin: 0 0 15px 0;
+  text-align: left;
 }
 
-/* Radio Buttons (Reutilizados) */
 .radio-circle {
   width: 22px;
   height: 22px;
@@ -142,26 +180,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #EBEFF2;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .radio-circle.selected {
-  border-color: var(--accent-red);
+  border-color: #D1D5DB;
 }
 
 .radio-inner {
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   background-color: var(--accent-red);
   border-radius: 50%;
 }
 
-/* Calendario */
 .calendar-container {
   background-color: var(--calendar-bg);
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
+  border: 1px solid #88888815;
 }
 
 .calendar-header {
@@ -172,7 +212,7 @@ body {
 }
 
 .cal-month {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-dark);
 }
@@ -194,8 +234,8 @@ body {
 }
 
 .cal-day-name {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
   color: #9CA3AF;
   margin-bottom: 5px;
 }
@@ -227,7 +267,7 @@ body {
   cursor: default;
 }
 
-/* Selector de Hora */
+/* ===== SELECTOR DE HORA ===== */
 .time-selector-row {
   display: flex;
   justify-content: space-between;
@@ -235,56 +275,82 @@ body {
 }
 
 .time-label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-dark);
 }
 
+/* El borde va en el WRAPPER: así envuelve texto Y flechas */
 .time-input-wrapper {
   display: flex;
   align-items: center;
-  background-color: var(--calendar-bg);
-  border-radius: 8px;
-  padding: 5px 10px;
+  justify-content: space-between;
+  background-color: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;              /* ← CONTORNO TOTALMENTE REDONDEADO */
+  padding: 3px 10px;                /* ← un poco más de padding lateral */
+  min-width: 150px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
+/* El input va sin borde (el borde lo tiene el wrapper) */
 .time-input {
   border: none;
   background: transparent;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: var(--text-dark);
-  width: 80px;
-  text-align: center;
+  color: #475569;
+  width: 75px;
+  text-align: left;
   outline: none;
+  font-family: inherit;
+  padding-left: 4px;                /* ← pequeño respiro desde el borde curvo */
 }
 
+/* Flechas dentro del borde */
 .time-arrows {
   display: flex;
   flex-direction: column;
-  font-size: 8px;
-  color: var(--text-grey);
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: #020202c5;
   cursor: pointer;
+  user-select: none;
+  line-height: 0;
+  gap: 5px;                    /* ← SEPARACIÓN entre flecha y flecha */
 }
 
-/* Footer Fijo */
+.time-arrows span {
+  padding: 0 3px;
+  transition: color 0.2s;
+  display: inline-block;
+  transform: scaleX(1.6);      /* ← Flechas más ANCHAS */
+}
+
+.time-arrows span:hover {
+  color: var(--primary-blue);
+}
+
+/* ===== FOOTER ===== */
 .footer-fixed {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   background: white;
-  padding: 15px 20px 25px;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  padding: 15px 20px 35px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+  z-index: 15;
 }
 
 .next-btn {
   width: 100%;
-  background-color: var(--primary-blue);
+  background-color: #2A3440;
   color: white;
   border: none;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;

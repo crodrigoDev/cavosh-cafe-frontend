@@ -1,19 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --primary-blue: #2E3A59;
-  --accent-red: #E74C3C;
+  --primary-blue: #35536B;
   --bg-white: #ffffff;
-  --bg-light: #F3F4F6; /* Gris claro para tarjetas */
-  --bg-card: #F9FAFB; /* Fondo de items */
+  --bg-light: #ffffff;
+  --bg-card: #F9FAFB;
+  --bg-user-card: #EBEFF2;
   --text-dark: #1F2937;
   --text-grey: #6B7280;
   --border-color: #E5E7EB;
+
+  /* Color único para TODOS los iconos y textos SVG */
+  --icon-color: #8198A6;
+  --icon-hover: #35536B;
+  --icon-active: #E65737;
+
+  --toggle-on-bg: #FCE9E4;
+  --toggle-on-border: #F5B8AC;
+  --toggle-on-knob: #E85D4A;
+
+  --toggle-off-bg: #E3E7EA;
+  --toggle-off-border: #B6C4CE;
+  --toggle-off-knob: #5F7484;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* --- CENTRADO GLOBAL --- */
 html, body {
   margin: 0;
   padding: 0;
@@ -22,18 +36,24 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
   display: flex;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  padding: 16px;
+  overflow-y: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
 }
 
 /* Contenedor principal simulando móvil */
 .app-container {
   width: 375px;
-  height: 812px;
+  height: 760px;
   background-color: var(--bg-white);
   border-radius: 30px;
   overflow: hidden;
@@ -41,109 +61,178 @@ body {
   flex-direction: column;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   position: relative;
-  margin: 0 auto;
+  margin: auto;
 }
 
-/* Cabecera */
+/* --- HEADER --- */
 .app-header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--primary-blue);
   color: white;
-  padding: 50px 20px 20px;
+  padding: 50px 20px 40px;
   display: flex;
   align-items: center;
+  position: relative;
+  min-height: 140px;
+  border-radius: 0 0 24px 24px;
+  flex-shrink: 0;
 }
 
-.profile-header h1 {
-  font-size: 22px;
-  font-weight: 700;
+.app-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(53, 83, 107, 0.45);
+  pointer-events: none;
+  border-radius: 0 0 24px 24px;
+}
+
+.profile-header .profile-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
   margin: 0;
-}
-
-/* Área scrolleable */
-.content-scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 20px 100px; /* Espacio para la barra inferior */
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 /* --- Tarjeta de Usuario --- */
+.user-card-wrapper {
+  padding: 0 20px;
+  margin-top: -35px;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
 .user-card {
   display: flex;
   align-items: center;
-  background-color: var(--bg-light);
-  border-radius: 20px;
-  padding: 15px;
-  margin-top: -15px; /* Superponer ligeramente sobre el header azul */
-  margin-bottom: 25px;
-  position: relative;
-  z-index: 10;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  background-color: var(--bg-user-card);
+  border-radius: 999px;
+  padding: 12px 18px 12px 12px;
+  margin: 0 0 12px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .avatar-container {
-  margin-right: 15px;
+  margin-right: 14px;
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
-  background-color: #FDE68A; /* Color de fondo del avatar */
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  border: 2px solid white;
+  background-color: #FEF3C7;
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .user-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 2px;
 }
 
 .user-name {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-dark);
+  line-height: 1.2;
 }
 
 .user-points {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .star-icon {
-  color: var(--accent-red);
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: var(--icon-color);
+  transition: color 0.2s;
 }
 
 .points-text {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--text-dark);
+  color: var(--text-grey);
 }
 
+/* --- Botón editar --- */
 .edit-profile-btn {
   background: none;
   border: none;
-  font-size: 18px;
-  color: var(--text-grey);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px 0 0;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  color: var(--icon-color);
+  transition: color 0.2s;
 }
 
-/* --- Secciones de Menú --- */
+.edit-profile-btn svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* --- Área scrolleable --- */
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 100px;
+  scrollbar-width: none;
+}
+
+.content-scroll-area::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Secciones --- */
 .menu-section {
-  margin-bottom: 25px;
+  margin-bottom: 6px;
+  padding: 0;
+  text-align: left;
+}
+
+.menu-section:last-child {
+  margin-bottom: 0;
 }
 
 .section-title {
   font-size: 14px;
   font-weight: 700;
   color: var(--text-dark);
-  margin: 0 0 10px 5px;
+  margin: 0 0 4px 0;
+  text-align: left;
 }
 
 .menu-card {
@@ -159,29 +248,37 @@ body {
   align-items: center;
   background: transparent;
   border: none;
-  padding: 15px 15px;
+  padding: 8px 15px;
   cursor: pointer;
   text-align: left;
-  border-bottom: 1px solid #E5E7EB; /* Separador entre items */
+  border-bottom: 1px solid #E5E7EB;
   width: 100%;
-  transition: background-color 0.2s;
+  transition: color 0.2s;
 }
 
 .menu-item:last-child {
   border-bottom: none;
 }
 
-.menu-item:hover {
-  background-color: #E5E7EB;
+/* --- Íconos del menú --- */
+.menu-icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 12px;
+  color: var(--icon-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: transparent;
+  transition: color 0.2s;
 }
 
-.menu-icon {
-  width: 24px;
-  font-size: 16px;
-  margin-right: 15px;
-  color: var(--text-grey);
-  display: flex;
-  justify-content: center;
+.menu-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: transparent;
 }
 
 .menu-label {
@@ -189,45 +286,55 @@ body {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-dark);
+  transition: color 0.2s;
 }
 
-/* --- Toggles (Interruptores) --- */
+/* --- Toggles --- */
 .toggle-item {
-  cursor: default; /* No es un botón clickeable, es un toggle */
+  cursor: default;
 }
 
-.toggle-item:hover {
-  background-color: transparent; /* Sin hover en toggles */
+.toggle-item:hover .menu-icon {
+  color: var(--icon-color);
+}
+
+.toggle-item:hover .menu-label {
+  color: var(--text-dark);
 }
 
 .toggle-switch {
-  width: 40px;
-  height: 22px;
-  background-color: #D1D5DB; /* Gris inactivo */
-  border-radius: 20px;
+  width: 46px;
+  height: 26px;
+  background-color: var(--toggle-off-bg);
+  border: 1.5px solid var(--toggle-off-border);
+  border-radius: 999px;
   position: relative;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s;
+  flex-shrink: 0;
+  padding: 0;
 }
 
 .toggle-switch.active {
-  background-color: #A5B4CB; /* Azul grisáceo activo (similar a la imagen) */
+  background-color: var(--toggle-on-bg);
+  border-color: var(--toggle-on-border);
 }
 
 .toggle-knob {
-  width: 18px;
-  height: 18px;
-  background-color: white;
+  width: 20px;
+  height: 20px;
+  background-color: var(--toggle-off-knob);
   border-radius: 50%;
   position: absolute;
-  top: 2px;
+  top: 50%;
   left: 2px;
-  transition: transform 0.3s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transform: translateY(-50%);
+  transition: transform 0.3s ease, background-color 0.3s;
 }
 
 .toggle-switch.active .toggle-knob {
-  transform: translateX(18px);
+  transform: translate(20px, -50%);
+  background-color: var(--toggle-on-knob);
 }
 
 /* --- Barra de Navegación Inferior --- */
@@ -240,9 +347,14 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 10px 25px; /* Espacio extra abajo */
-  border-top: 1px solid var(--border-color);
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  padding: 6px 8px 14px;
+  border: 1.5px solid var(--border-color);
+  border-bottom: none;
+  box-shadow:
+    0 -4px 10px rgba(0, 0, 0, 0.05),
+    0 -1px 0 rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  border-radius: 24px 24px 0 0;
 }
 
 .nav-item {
@@ -250,30 +362,82 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background: none;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px 5px;
   flex: 1;
+  color: var(--icon-color);
+  transition: color 0.2s;
 }
 
 .nav-icon {
-  font-size: 20px;
-  color: #9CA3AF; /* Gris para inactivo */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: transparent;
+  transition: color 0.2s;
+}
+
+.nav-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: transparent;
 }
 
 .nav-label {
   font-size: 10px;
   font-weight: 500;
-  color: #9CA3AF;
+  color: inherit;
+  transition: color 0.2s;
 }
 
-/* Estado activo de la navegación */
-.nav-item.active .nav-icon {
-  color: var(--accent-red);
+/* =====================================================
+   COMPORTAMIENTO DE COLOR
+   Base: gris → Hover: azul → Click: naranja (icono + texto)
+   ===================================================== */
+
+/* Quita outline/borde por defecto */
+.menu-item:focus,
+.menu-item:active,
+.nav-item:focus,
+.nav-item:active,
+.toggle-switch:focus,
+.toggle-switch:active,
+.edit-profile-btn:focus,
+.edit-profile-btn:active,
+.menu-icon:focus,
+.menu-icon svg:focus,
+.nav-icon:focus,
+.nav-icon svg:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
-.nav-item.active .nav-label {
-  color: var(--accent-red);
-  font-weight: 700;
+/* --- HOVER: icono + texto en azul --- */
+.menu-item:hover .menu-icon,
+.menu-item:hover .menu-label,
+.nav-item:hover .nav-icon,
+.nav-item:hover .nav-label,
+.edit-profile-btn:hover {
+  color: var(--icon-hover);
+}
+
+/* --- CLICK / ACTIVO: icono + texto en naranja --- */
+.menu-item:focus .menu-icon,
+.menu-item:focus .menu-label,
+.menu-item:active .menu-icon,
+.menu-item:active .menu-label,
+.nav-item:focus .nav-icon,
+.nav-item:focus .nav-label,
+.nav-item:active .nav-icon,
+.nav-item:active .nav-label,
+.edit-profile-btn:focus,
+.edit-profile-btn:active {
+  color: var(--icon-active);
 }

@@ -1,21 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-  --primary-blue: #2E3A59;
+  --primary-blue: #35536B;
   --accent-red: #E74C3C;
   --bg-white: #ffffff;
-  --bg-light: #F3F4F6; /* Gris muy claro para fondos */
+  --bg-light: #F3F4F6;
   --text-dark: #1F2937;
   --text-grey: #6B7280;
   --text-blue-grey: #9CA3AF;
   --border-color: #E5E7EB;
   --timeline-dark: #2E3A59;
-  --timeline-light: #A5B4CB; /* Azul grisáceo claro */
+  --timeline-active: #6B8CAE;
+  --timeline-light: #C5D3E8;
+
+  --dashboard-height: 150px;
+  --dashboard-radius: 30px;
+  --app-radius: 30px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-/* --- CENTRADO GLOBAL --- */
 html, body {
   margin: 0;
   padding: 0;
@@ -24,84 +28,124 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f2f5; 
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-/* Contenedor principal simulando móvil */
 .app-container {
   width: 375px;
-  height: 812px;
+  height: 900px;
   background-color: var(--bg-white);
-  border-radius: 30px;
+  border-radius: var(--app-radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   position: relative;
   margin: 0 auto;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Cabecera */
-.app-header {
-  background-color: var(--primary-blue);
-  color: white;
-  padding: 50px 20px 30px; /* Más padding abajo para las tabs */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.dashboard-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--dashboard-height);
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 0 0 var(--dashboard-radius) var(--dashboard-radius);
 }
 
-.tracking-header h1 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
+.dashboard-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--dashboard-height);
+  background: linear-gradient(
+    to bottom,
+    rgba(53, 83, 107, 0.85),
+    rgba(53, 83, 107, 0.4)
+  );
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 0 0 var(--dashboard-radius) var(--dashboard-radius);
 }
 
-/* Área scrolleable */
-.content-scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 20px 100px;
-}
-
-/* --- Tabs (Tracking / Order details) --- */
-.tracking-tabs-container {
-  margin-top: -20px; /* Superponer sobre el header azul */
-  margin-bottom: 25px;
-  position: relative;
+.dashboard-title {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  right: 20px;
   z-index: 10;
+  margin: 0;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
 }
 
-.tracking-tabs {
+.method-tabs {
+  position: absolute;
+  top: 130px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
   display: flex;
-  background-color: #E5E7EB;
-  border-radius: 25px;
-  padding: 4px;
+  padding: 0;
+  background-color: #EDEFF3;
+  border-radius: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-.tab-btn {
+.method-tab {
   flex: 1;
   padding: 12px;
   border: none;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   cursor: pointer;
-  background: transparent;
-  color: var(--text-grey);
-  transition: all 0.2s;
+  background-color: transparent;
+  color: var(--text-dark);
+  transition: all 0.25s ease;
 }
 
-.tab-btn.active {
+.method-tab:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.method-tab.active {
   background-color: var(--accent-red);
   color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.35);
+}
+
+.method-tab:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 2px;
+}
+
+.content-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 150px 20px 100px;
+  position: relative;
+  z-index: 2;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content-scroll-area::-webkit-scrollbar {
+  display: none;
 }
 
 /* --- Tarjeta de Número de Pedido --- */
@@ -109,32 +153,44 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--bg-light);
-  border-radius: 12px;
-  padding: 15px;
+  background-color: #EBEFF2;
+  border-radius: 22px;
+  padding: 1px;
   margin-bottom: 25px;
+  margin-top: 70px;
 }
 
 .order-number-label {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-dark);
+  padding-left: 14px; /* pequeño respiro a la izquierda */
 }
 
 .order-number-badge {
-  background-color: var(--primary-blue);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 65px;
+  height: 70px;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+
+  background-color: var(--primary-blue);
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: inset 0 0 0 1000px rgba(53, 83, 107, 0.55);
+
+  /* 👇 Desplaza el badge más a la derecha */
+  margin-right: -12px;
 }
 
 .badge-number {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 25px;
+  font-weight: 400;
+  position: relative;
 }
 
 /* --- Información de Recogida --- */
@@ -143,25 +199,31 @@ body {
   flex-direction: column;
   gap: 15px;
   margin-bottom: 35px;
+  align-items: flex-start;
 }
 
 .info-row {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: flex-start;
+  gap: 8px;
 }
 
 .info-label {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-dark);
-  width: 40%;
+  width: 130px;
+  flex-shrink: 0;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .info-value {
   font-size: 13px;
   color: var(--text-dark);
-  width: 60%;
+  width: auto;
   text-align: left;
 }
 
@@ -169,127 +231,164 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: flex-start;
 }
 
-/* --- Sección de Seguimiento (Timeline) --- */
+/* --- Timeline: una sola barra con capas ovaladas --- */
 .tracking-section {
   margin-bottom: 20px;
 }
 
 .section-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-dark);
   margin: 0 0 20px 0;
+  text-align: left;
 }
 
-.timeline-container {
-  position: relative;
-  padding-left: 15px; /* Espacio para la línea */
-}
-
-/* Línea vertical de fondo (gris) */
-.timeline-line-bg {
-  position: absolute;
-  left: 25px; /* Centrado con los círculos */
-  top: 10px;
-  bottom: 10px;
-  width: 15px;
-  background-color: var(--bg-light);
-  border-radius: 10px;
-  z-index: 1;
-}
-
-/* Barra de progreso (azul oscuro) */
-.timeline-progress-bar {
-  position: absolute;
-  left: 25px;
-  top: 10px;
-  width: 15px;
-  background-color: var(--timeline-dark);
-  border-radius: 10px;
-  z-index: 2;
-  transition: height 0.3s ease;
-}
-
-.timeline-item {
+.timeline-wrapper {
   display: flex;
-  align-items: center;
   gap: 20px;
-  margin-bottom: 35px;
+  align-items: stretch;
+}
+
+.timeline-bar {
+  width: 38px;
+  min-height: 255px;
+  background-color: var(--timeline-light);
+  border-radius: 19px;
   position: relative;
-  z-index: 3;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Indicadores visuales (Círculos) */
-.timeline-indicator {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   flex-shrink: 0;
 }
 
-.circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--bg-light);
-  border: 3px solid white; /* Borde blanco para separar de la línea */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.timeline-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 19px 19px;
 }
 
-/* Estados de los círculos */
-.circle.filled {
+.timeline-bar-fill.active {
+  background-color: var(--timeline-active);
+  z-index: 1;
+}
+
+.timeline-bar-fill.completed {
   background-color: var(--timeline-dark);
+  z-index: 2;
 }
 
-.circle.active {
-  background-color: var(--timeline-light);
-  /* Si quisieras un efecto de pulso, se añadiría aquí */
+.timeline-steps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.circle.pending {
-  background-color: var(--bg-light);
-}
-
-/* Contenido del texto */
-.timeline-content {
+.timeline-step {
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
 }
 
 .step-label {
+  font-size: 15px;
+  text-align: left;
+}
+
+.timeline-step.completed .step-label {
+  font-weight: 700;
+  color: var(--timeline-dark);
+}
+
+.timeline-step.active .step-label {
+  font-weight: 600;
+  color: var(--timeline-active);
+}
+
+.timeline-step.pending .step-label {
+  font-weight: 500;
+  color: var(--text-blue-grey);
+}
+
+/* --- Check rojo con SVG inline --- */
+.check-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent-red);
+}
+
+.check-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.check-mark {
+  position: relative;
+  width: 150%;
+  height: 150%;
+  overflow: visible;
+  z-index: 1;
+}
+
+.check-placeholder {
+  width: 22px;
+  height: 22px;
+  background-color: #EBEFF2;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* --- Order details --- */
+.order-details-section {
+  margin-bottom: 20px;
+}
+
+.order-details-card {
+  background-color: var(--bg-light);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.detail-label {
+  font-size: 13px;
+  color: var(--text-grey);
+}
+
+.detail-value {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-dark);
 }
 
-/* Estilos según el estado del paso */
-.timeline-item.completed .step-label {
+.detail-row.total {
+  border-top: 1px solid var(--border-color);
+  margin-top: 8px;
+  padding-top: 12px;
   font-weight: 700;
 }
 
-.timeline-item.active .step-label {
-  color: var(--text-blue-grey);
-}
-
-.timeline-item.pending .step-label {
-  color: var(--text-blue-grey);
-}
-
-/* Icono de check */
-.check-icon {
-  color: var(--accent-red);
-  font-size: 20px;
-  font-weight: bold;
+.detail-row.total .detail-label,
+.detail-row.total .detail-value {
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
 /* --- Footer Fijo --- */
@@ -301,16 +400,18 @@ body {
   background: white;
   padding: 15px 20px 25px;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  z-index: 3;
 }
 
 .back-home-btn {
   width: 100%;
-  background-color: var(--primary-blue);
+  background-color: #2A3440;
   color: white;
   border: none;
   padding: 16px;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   cursor: pointer;
 }
