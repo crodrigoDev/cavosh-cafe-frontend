@@ -1,4 +1,6 @@
-# Logs
+# ============================================
+# LOGS
+# ============================================
 logs
 *.log
 npm-debug.log*
@@ -7,18 +9,92 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# ============================================
+# DEPENDENCIAS
+# ============================================
 node_modules
+node_modules/
+.pnpm-store
+.pnpm-store/
+
+# ============================================
+# BUILD / DIST
+# ============================================
 dist
+dist/
 dist-ssr
+dist-ssr/
+build
+build/
+out
+out/
 *.local
 
-# Editor directories and files
+# ============================================
+# VARIABLES DE ENTORNO
+# ============================================
+.env
+.env.*
+!.env.example
+
+# ============================================
+# CACHÉ
+# ============================================
+.cache/
+.vite/
+*.tsbuildinfo
+.eslintcache
+
+# ============================================
+# EDITOR DIRECTORIES AND FILES
+# ============================================
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
+
+# ============================================
+# SISTEMA OPERATIVO
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# DESPLIEGUE
+# ============================================
+.vercel
+.netlify
+.firebase/
+.netlify/
+
+# ============================================
+# TESTING / COBERTURA
+# ============================================
+coverage
+coverage/
+.nyc_output
+*.lcov
+
+# ============================================
+# TEMPORALES
+# ============================================
+*.tmp
+*.temp
+tmp/
+temp/
